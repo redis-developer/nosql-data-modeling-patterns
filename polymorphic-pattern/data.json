@@ -1,0 +1,22 @@
+[
+    {
+        "type": "earbuds",
+        "name": "Beats Studio Buds",
+        "brand": "Beats",
+        "sku": "6426149",
+        "model": "3006634/3005718",
+        "batteryLife": "8 hours",
+        "connectionType": "bluetooth",
+        "fit": "In-ear"
+    },
+    {
+        "type": "game console",
+        "name": "Playstation 5",
+        "brand": "Sony",
+        "sku": "6426149",
+        "model": "3006634/3005718",
+        "usbPorts": 2,
+        "hdmiPorts": 2,
+        "storageType": "SSD"
+    }
+]

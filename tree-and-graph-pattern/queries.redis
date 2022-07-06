@@ -1,0 +1,2 @@
+GRAPH.QUERY Org "MATCH (e:Employee)-[:REPORTS_TO]->(m:Employee { name: 'Doug' }) RETURN e,m"
+GRAPH.QUERY Org "MATCH (e:Employee)-[:WORKS_AT]->(l:Location { name: 'Seattle' }) RETURN e,l"

@@ -1,0 +1,22 @@
+{
+  "name": "aggregate-pattern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=17"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "demo": "node demo.js",
+    "import": "node import.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "redis": "^4.0.6",
+    "redis-om": "^0.2.1"
+  }
+}

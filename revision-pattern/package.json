@@ -1,0 +1,22 @@
+{
+  "name": "revision-pattern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cluster-key-slot": "^1.1.0",
+    "dotenv": "^16.0.1",
+    "redis": "^4.1.0",
+    "generic-pool": "^3.8.2",
+    "yallist": "^4.0.0",
+    "redis-om": "^0.3.3",
+    "tslib": "^2.4.0",
+    "ulid": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "poetry run python demo.py"
+  },
+  "author": "",
+  "license": "MIT"
+}

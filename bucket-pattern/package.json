@@ -1,0 +1,24 @@
+{
+  "name": "bucket-pattern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=17"
+  },
+  "scripts": {
+    "test": "echo %npm_package_name% && exit 1",
+    "compose": "docker-compose -p %npm_package_name% -f docker-compose.yml up -d",
+    "demo": "node demo.js",
+    "generate": "node generate.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "redis": "^4.0.4",
+    "redis-om": "^0.3.3",
+    "tslib": "^2.4.0"
+  }
+}

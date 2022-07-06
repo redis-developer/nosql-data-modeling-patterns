@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "redis-om-python-retail"
+version = "0.0.1"
+description = "An example integration between Redis OM and FastAPI for a retail application"
+authors = ["Will Johnston <will.johnston@redis.com>"]
+license = "BSD-3-Clause"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+fastapi = "^0.70.0"
+uvicorn = "^0.15.0"
+pydantic = {extras = ["email"], version = "^1.8.2"}
+fastapi-cache2 = {extras = ["redis"], version = "^0.1.7"}
+redis-om = "^0.0.17"
+requests = "^2.27.1"
+
+[tool.poetry.dev-dependencies]
+autopep8 = "^1.6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

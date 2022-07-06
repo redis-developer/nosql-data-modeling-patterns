@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "revision-pattern"
+version = "0.0.1"
+description = "An example of how to use NoSQL with Redis Stack and RedisOM for document versioning"
+authors = ["Will Johnston <will.johnston@redis.com>"]
+license = "BSD-3-Clause"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pydantic = {extras = ["email"], version = "^1.8.2"}
+redis-om = "^0.0.27"
+
+[tool.poetry.dev-dependencies]
+autopep8 = "^1.6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

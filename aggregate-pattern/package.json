@@ -1,0 +1,24 @@
+{
+  "name": "aggregate-pattern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=17"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "after": "node after.js",
+    "before": "node before.js",
+    "import:after": "node import_after.js",
+    "import:before": "node import_before.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "redis": "^4.0.6",
+    "redis-om": "^0.2.1"
+  }
+}

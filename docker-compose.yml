@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  redis:
+    container_name: redis
+    image: "redis/redis-stack:edge-edge"
+    ports:
+      - 6379:6379
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - redis-stack
+networks:
+  redis-stack: {}
