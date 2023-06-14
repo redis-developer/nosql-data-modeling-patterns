@@ -18,7 +18,6 @@ async function createTimeSeries() {
         'TS.CREATERULE temperature:raw temperature:monthly AGGREGATION avg 2629800000',
     ];
 
-    TS.RANGE temperature:monthly 0 +
     for (let command of commands) {
         await client.execute(command.split(' '));
     }
