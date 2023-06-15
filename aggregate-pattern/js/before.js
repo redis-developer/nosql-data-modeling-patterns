@@ -1,13 +1,12 @@
-import { Schema, Entity } from 'redis-om';
+import { Schema, Repository, EntityId } from 'redis-om';
 import { getClient } from './client.js';
+import { AggregateGroupByReducers, AggregateSteps } from 'redis';
 
-class Product extends Entity {}
-class ProductReview extends Entity {}
-
-const productSchema = new Schema(Product, {
+const productSchema = new Schema('Product', {
     name: { type: 'string' },
 });
-const productReviewSchema = new Schema(ProductReview, {
+
+const productReviewSchema = new Schema('ProductReview', {
     productId: { type: 'string' },
     author: { type: 'string' },
     rating: { type: 'number' },
@@ -15,8 +14,8 @@ const productReviewSchema = new Schema(ProductReview, {
 
 async function addReview(productId, author, rating) {
     const client = await getClient();
-    const productReviewRepo = client.fetchRepository(productReviewSchema);
-    await productReviewRepo.createAndSave({
+    const productReviews = new Repository(productReviewSchema, client);
+    await productReviews.save({
         productId,
         author,
         rating,
@@ -25,17 +24,31 @@ async function addReview(productId, author, rating) {
 
 async function getProducts() {
     const client = await getClient();
-    const productRepo = client.fetchRepository(productSchema);
+    const productRepo = new Repository(productSchema, client);
     const productEntities = await productRepo.search().return.all();
-    const results = await client.execute(
-        'FT.AGGREGATE ProductReview:index * GROUPBY 1 @productId REDUCE AVG 1 @rating REDUCE COUNT 0'.split(
-            /\s+/
-        )
+    const { results } = await client.ft.aggregate(
+        'ProductReview:index',
+        '*',
+        {
+            STEPS: [
+                {
+                    type: AggregateSteps.GROUPBY,
+                    properties: '@productId',
+                    REDUCE: [{
+                        property: '@rating',
+                        type: AggregateGroupByReducers.AVG,
+                        AS: 'avgRating'
+                    }, {
+                        type: AggregateGroupByReducers.COUNT,
+                        AS: 'numReviews'
+                    }],
+                }
+            ],
+        }
     );
 
     const products = {};
-    for (let result of results.slice(1)) {
-        const [, productId, , avgRating, , numReviews] = result;
+    for (let { productId, avgRating, numReviews } of results) {
         products[productId] = {
             avgRating: Number(avgRating),
             numReviews: Number(numReviews),
@@ -44,8 +57,13 @@ async function getProducts() {
 
     return productEntities.map((entity) => {
         return {
-            ...entity.entityData,
-            ...products[entity.entityId],
+            id: entity[EntityId],
+            ...entity,
+            ...products[entity[EntityId]],
         };
     });
 }
+
+console.log(await getProducts());
+
+process.exit(1);
