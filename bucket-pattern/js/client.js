@@ -1,19 +1,22 @@
-import { Client } from 'redis-om';
+import { createClient } from 'redis';
 import { config } from 'dotenv';
 
 config();
 
 const clientPromise = new Promise(async (resolve) => {
-    const client = new Client();
+    const client = createClient({
+        url: process.env.REDIS_URL,
+    });
 
-    await client.open(process.env.REDIS_URL);
+    client.on('error', (err) => console.log('Redis Client Error', err));
+    await client.connect();
 
     resolve(client);
 });
 
 /**
  *
- * @returns {Promise<Client>}
+ * @returns {Promise<import('redis').RedisClientType>}
  */
 export async function getClient() {
     return clientPromise;
