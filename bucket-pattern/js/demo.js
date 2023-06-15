@@ -143,7 +143,7 @@ async function perf() {
 
 try {
     // Run the load function to populate the database
-    // await load();
+    await load();
 
     // Run the perf function to compare the performance of the queries
     await perf();
